@@ -1,0 +1,13 @@
+body {
+    margin: auto;
+    width: 640px; 
+    padding: 50px;
+    color: #33475b;    
+  }
+  
+  /* Centered Image Code */
+  
+  div {
+  display: flex;
+  justify-content: center;
+  }

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Books for {{ emotion }}{% endblock title %}
+
+{% block style %}
+<style>
+
+.small-image {
+    width: 200px;
+    height: 300px;
+  }
+
+  .custom-card {
+    width: 350px; /* Adjust the width as needed */
+    height: 450px; /* Adjust the height as needed */
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }  
+
+
+  .custom-card .card-img-top {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  #video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #video-card {
+    max-width: 150000px;
+  }
+
+  #video-card .card-header {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+</style>
+{% endblock %}
+{% block body %}
+
+<div class="container">
+    <h1>Books for {{ emotion }}</h1>
+    <hr>
+    <div class="row">
+      {% for book in books %}
+        <div class="col-md-4 mb-4">
+          
+            <div class="card custom-card">
+              <a href="{{ url_for('book_detail', title=book.title) }}">
+              <img src="{{ url_for('static', filename='book_covers/' ~ book.title ~ '.jpg') }}" class="card-img-top small-image" alt="{{ book.title }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+              </a>
+                <p class="card-text">{{ book.author }}</p>
+              </div>
+            </div>
+          
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+
+{% endblock body %}

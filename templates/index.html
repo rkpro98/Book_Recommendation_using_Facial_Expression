@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block style %}
+<style>
+  .form-group{
+    width: 900px;
+  }
+  
+</style>
+  
+{% endblock style %}
+
+{% block body %}
+
+<div class="container py-3 mb-4">
+  <form action="{{ url_for('search') }}" method="POST">
+    <div class="row">
+      <div class="col-9">
+        <input type="text" class="form-control form-control-lg" id="search-input" name="search_query" placeholder="Search for Books Here ...............................................................................................................................">
+      </div>
+      <div class="col-3">
+        <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

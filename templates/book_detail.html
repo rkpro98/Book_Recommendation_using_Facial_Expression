@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ book.title }} {% endblock title %}
+
+{% block style %}
+
+
+<style>
+    .rating {
+      font-size: 1.5rem;
+      color: #f5c518;
+    }
+
+    .container {
+        margin-top: 30px;
+    }
+
+    .book-cover {
+        width: 300px;
+        height: 450px;
+        object-fit: contain;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .book-details {
+        margin-top: 20px;
+        font-size: 20px;
+        line-height: 1.5;
+    }
+
+    .book-details h1 {
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .book-details h4 {
+        font-size: 24px;
+        font-weight: normal;
+        margin-bottom: 10px;
+    }
+
+    .book-details p {
+        margin-bottom: 10px;
+    }
+
+    .book-details p.rating {
+        font-size: 20px;
+        font-weight: bold;
+        color: #FFD700;
+        margin-top: 30px;
+    }
+
+    .btn-back {
+        margin-top: 30px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .btn-back:hover {
+        background-color: #14df9145;
+    }
+
+    .fa-star-half-o:before {
+        content: "\f123";
+        position: absolute;
+        width: 50%;
+        overflow: hidden;
+    }
+
+    .stars {
+        --star-size: 1.2rem;
+        --rating: 0;
+        display: inline-block;
+        font-size: var(--star-size);
+        font-family: Times;
+        line-height: 1;
+    }
+    
+    .stars::before {
+        content: '★★★★★';
+        letter-spacing: 0.2rem;
+        background: linear-gradient(90deg, #f39c12 var(--rating), #c5c5c5 var(--rating));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+        <div class="col-md-4">
+            <img src="{{ url_for('static', filename='book_covers/' ~ book.title ~ '.jpg') }}" class="img-fluid" alt="{{ book.title }}">
+        </div>
+        <div class="col-md-8">
+            <h1>{{ book.title }}</h1>
+            <h4>By: {{ book.author }}</h4>
+            <p>{{ book.description }}</p>
+            <p class="rating">Goodreads Rating:
+                {% set full_stars = rating|int %}
+                {% set half_star = rating - full_stars %}
+                {% set empty_stars = 5 - (full_stars + (1 if half_star > 0 else 0)) %}
+                {% for i in range(full_stars) %}
+                    <span class="fa fa-star checked"></span>
+                {% endfor %}
+                {% if half_star > 0 %}
+                    <span class="fa fa-star-half-o checked"></span>
+                {% endif %}
+                {% for i in range(empty_stars) %}
+                    <span class="fa fa-star-o"></span>
+                {% endfor %}
+                <span>{{ rating }}</span>
+              </p>
+              <span class="stars" style="--rating: {{ rating }};"></span>
+              <button type="button" class="btn btn-outline-success" onclick="location.href='/books/{{ file[-1] }}'"> Back </button>
+          </div>
+          </div>
+      </div>
+
+{% endblock %}

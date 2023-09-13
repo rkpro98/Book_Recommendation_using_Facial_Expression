@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Capture Emotion{% endblock title %}
+
+{% block style %}
+<style>
+  #video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #video-card {
+    max-width: 900px;
+  }
+
+  #video-card .card-header {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container" id="video">
+
+  <div class="card" id="video-card">
+    <div class="card-header">Capture Emotion</div>
+    <div class="card-body">
+      <img src="{{ url_for('video_feed') }}">
+    </div>
+    <div class="card-footer text-center">
+      <a class="btn btn-primary" href="/capture" role="button">Capture</a>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
